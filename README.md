@@ -9,7 +9,7 @@ https://webglstudy.github.io/16_MSAA/
 # 課題
 次の問題に挑戦してみてください。
 
-- Alpha to coverage を
+- Alpha to coverage で半透明を実現してみよう（アルファ値はテクスチャ座標のu値等にしてみる）
   - keyword: gl.SAMPLE_ALPHA_TO_COVERAGE
 
 # 課題の進め方
