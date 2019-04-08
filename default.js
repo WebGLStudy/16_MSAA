@@ -7,15 +7,16 @@
     let gl, canvas;
     let program_scene, program_scene_centroid;
     
-    let program_post;
+    let program_post;// 全画面描画（結果をキャンバスのフレームバッファにコピー）
     let mesh_full_screen;
     
-    let mesh_flag = [];
+    let mesh_flag = [];// 旗モデル
     let wMatrixRotate;
     
     // メッセージを更新
     let sendMessage = msg => document.getElementById('message').innerText = msg;
     
+    // 状態管理
     const STATE = {
         NO_MSAA : "非MSAA",
         MSAA : "MSAA",
@@ -40,7 +41,7 @@
 
         // state 管理
         ChangeState();// 適当な値で強制更新することで初期化
-        window.addEventListener("keydown", event => {if (event.keyCode === 32) ChangeState();} );
+        window.addEventListener("keydown", event => {if (event.keyCode === 32) ChangeState();} );// 空白押しで切り替え
         
         // canvas の初期化
         canvas = document.getElementById('canvas', {antialias: false});
@@ -49,14 +50,6 @@
         
         // WeebGLの初期化(WebGL 2.0)
         gl = canvas.getContext('webgl2');
-        
-        // 浮動小数点数レンダーターゲットの確認
-        let ext;
-        ext = gl.getExtension('EXT_color_buffer_float');
-        if(ext == null){
-            alert('float texture not supported');
-            return;
-        }
         
         ////////////////////////////
         // プログラムオブジェクトの初期化
@@ -160,8 +153,8 @@
 
         // 旗
         for(let i = 0; i < FLAG_COUNT; i++){
-            let u_offset = (i & 1 === 1) ? 0.5 : 0.0;
-            let v_offset = (i >> 1=== 1) ? 0.5 : 0.0;
+            let u_offset = (i & 1 === 1) ? 0.5 : 0.0;// 奇数か偶数
+            let v_offset = (i >> 1=== 1) ? 0.5 : 0.0;// 2以下か以上か
             mesh_flag.push(
                 createMesh(gl, program_scene.prg, [
                  // x    y     z       u             v 
@@ -244,7 +237,7 @@
                 gl.bindTexture(gl.TEXTURE_2D, flagTex.tex); // 盛り上げる形状
                 gl.uniform1i(prg.loc[1], 0);// 'samp'
                 for(let i = 0; i < FLAG_COUNT; i++){
-                    let x_offset = (i & 1 === 1) ? 0.5 : -0.5;
+                    let x_offset = (i & 1 === 1) ? 0.5 : -0.5;// 旗ごとに位置をずらす
                     let y_offset = (i >> 1=== 1) ? 0.5 : -0.5;
                     let m = mat.create();
                     mat.translate(mat.identity(mat.create()), [x_offset, y_offset, 0], m);
@@ -260,8 +253,7 @@
             let tex = fb.t;
             if(bMSAA) 
             {
-                // 描画結果のコピー
-                resolve(fbMSAA);
+                resolve(fbMSAA);// 描画結果をテクスチャにコピー
                 tex = fbMSAA.t;
             }
             
@@ -469,6 +461,4 @@
             gl.COLOR_BUFFER_BIT, gl.NEAREST
         );
     }
-
-    
 })();
