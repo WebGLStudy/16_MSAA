@@ -9,7 +9,8 @@ https://webglstudy.github.io/16_MSAA/
 # 課題
 次の問題に挑戦してみてください。
 
-- MSAAのサンプル数を変えてみよう
+- Alpha to coverage を
+  - keyword: gl.SAMPLE_ALPHA_TO_COVERAGE
 
 # 課題の進め方
 次のように課題を解いてみてください。
