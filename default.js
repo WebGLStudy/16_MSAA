@@ -212,7 +212,7 @@
             // カメラを回すパラメータ
             angle += 0.0001 * elapsedTime;
             if(1.0 < angle) angle -= 1.0;
-angle = 0.325;
+//angle = 0.325;
             // ワールド行列の生成
             wMatrixRotate = mat.identity(mat.create());
             mat.rotate(wMatrixRotate, 2.0 * Math.PI * angle, [0,0,1], wMatrixRotate);
