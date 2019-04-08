@@ -1,6 +1,6 @@
 # Multi Sampling Anti-Aliasing
 MSAAで描画します。
-centroid 指定子を使ったテクスチャのはみ出しの対策の切り替えもできます。
+centroid 修飾子を使ったテクスチャのはみ出しの対策の切り替えもできます。
 
 https://webglstudy.github.io/16_MSAA/
 
