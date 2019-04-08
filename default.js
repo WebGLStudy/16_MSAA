@@ -5,10 +5,10 @@
 
     // 変数
     let gl, canvas;
-    let program_scene, program_scene_centroid, program_post;
+    let program_scene, program_scene_centroid;
     
+    let program_post;
     let mesh_full_screen;
-    let mesh_water;
     
     let mesh_flag = [];
     let wMatrixRotate;
